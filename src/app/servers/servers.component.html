@@ -1,2 +1,22 @@
+<label>Server Name </label>
+<!-- event expression binding -->
+<!-- <input type="text" (input)="updateServerName($event)" class="form-control"> -->
+
+<!-- two-way binding, it doesn't need any custom function in .ts compared to
+      event expression binding -->
+<input type="text" class="form-control" [(ngModel)]="serverName">
+
+<button [disabled]="!allowNewServer" (click)="onCreateServer()" class="btn btn-primary">Add Server</button>
+
+<p *ngIf="serverCreated; else noServer"> {{ serverCreationStatus }} </p>
+<ng-template  #noServer>
+  <p> no server is created ! </p>
+</ng-template>
+<hr>
+<h4> Exercise/Assignment 2</h4>
+<input type="text"  [(ngModel)]="userName" class="form-control">
+<button [disabled]="checkEmpty()" (click)="resetForm()" class="btn btn-primary">Reset</button>
+<p>The username is {{ userName }} </p>
+
 <app-server></app-server>
 <app-server></app-server>
