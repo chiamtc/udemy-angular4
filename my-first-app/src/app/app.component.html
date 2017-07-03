@@ -7,8 +7,42 @@
     <!-- when servers selector is selector:'app-server' <app-servers></app-servers>-->
     <!-- when servers selector is selector:'[app-server]' <div app-servers></div>-->
     <div class="app-servers"></div>
-    <app-success-alert></app-success-alert>
+    <app-success-alert ></app-success-alert>
     <div app-warning-alert></div>
+
     </div>
   </div>
+
+
+
+  <app-cockpit (serverCreated)="onServerAdded($event)"
+  (bpCreated)="onBlueprintAdded($event)"></app-cockpit>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onChangeFirst()">Chagnes </button>
+      <button class="btn btn-danger" (click)="onDestroyFirst()">Destroy first </button>
+      <app-server-element *ngFor="let serverElement of serverElements"
+        [srvElement]="serverElement"
+        [name]="serverElement.name">
+        <p>
+          <strong *ngIf="serverElement.type === 'server'" style="color:red"> {{ serverElement.content }} </strong>
+          <em *ngIf="serverElement.type==='blueprint'">{{ serverElement.content }}</em>
+        </p>
+
+      </app-server-element>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xs-12">
+      <app-game-component (timeFired)="onTimeFire($event)" ></app-game-component>
+      <app-odd *ngFor="let oddNumber of oddNumbers" [number]="oddNumber"></app-odd >
+      <app-even *ngFor="let evenNumber of evenNumbers" [number]="evenNumber"></app-even >
+    </div>
+  </div>
+
+  <p appBasicHighlight> Style me with directive </p>
+  <p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'red'"> Style me with directive </p>
 </div>

@@ -7,6 +7,13 @@ import { ServerComponent } from './server/server.component';
 import { ServersComponent } from './servers/servers.component';
 import { SuccessAlertComponent } from './success-alert/success-alert.component';
 import { WarningAlertComponent } from './warning-alert/warning-alert.component';
+import { CockpitComponent } from './cockpit/cockpit.component';
+import { ServerElementComponent } from './server-element/server-element.component';
+import { GameComponentComponent } from './game-component/game-component.component';
+import { OddComponent } from './odd/odd.component';
+import { EvenComponent } from './even/even.component';
+import { BasicHighlightDirective } from './basic-highlight/basic-highlight.directive';
+import { BetterHighlightDirective } from './better-highlight/better-highlight.directive';
 
 /* NgModule - a decorator to make components a 'piece'
 NgModule is a decorator function that takes a single metadata object whose properties describe the module. The most important properties are:
@@ -27,7 +34,14 @@ bootstrap - the main application view, called the root component, that hosts all
     ServerComponent,
     ServersComponent,
     SuccessAlertComponent,
-    WarningAlertComponent
+    WarningAlertComponent,
+    CockpitComponent,
+    ServerElementComponent,
+    GameComponentComponent,
+    OddComponent,
+    EvenComponent,
+    BasicHighlightDirective,
+    BetterHighlightDirective
   ],
   imports: [
     BrowserModule,

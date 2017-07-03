@@ -1,2 +1,4 @@
 <!-- [ngStyle] = {'properties':'values or functions to return value'} look for angularjs4 docs -->
-<p [ngStyle]="{'background-color':getColor()}"> The server {{ serverId }} and status is {{ serverStatus }}
+<p [ngStyle]="{'background-color':getColor()}"
+  [ngClass]="{online: serverStatus === 'online'}"
+> The server {{ serverId }} and status is {{ serverStatus }}

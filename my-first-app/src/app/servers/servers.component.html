@@ -18,5 +18,11 @@
 <button [disabled]="checkEmpty()" (click)="resetForm()" class="btn btn-primary">Reset</button>
 <p>The username is {{ userName }} </p>
 
-<app-server></app-server>
-<app-server></app-server>
+<app-server *ngFor="let server of servers"></app-server>
+
+<button class="btn btn-primary" (click)="displayDetails()">Display Details</button>
+<p [hidden]="toShow" *ngFor="let number of toShowLists" [ngStyle]="{'background-color':setColor(number)}" [ngClass]="{makeWhite: number >= 5}">Secret Password = tuna</p>
+
+<div *ngFor="let number of toShowLists; let i = index">
+  {{ number }} with index - {{ i }}
+</div>

@@ -12,7 +12,12 @@ export class ServersComponent implements OnInit {
   serverName ='Testserver';
   serverCreated = false;
   userName="";
+  servers=['testservers', 'testservers2'];
   allowClick = false;
+
+  toShow = false;
+  toShowValue =1 ;
+  toShowLists = [];
   constructor() {
     setTimeout(()=>{
         this.allowNewServer= true;
@@ -25,7 +30,7 @@ export class ServersComponent implements OnInit {
   onCreateServer(){
     this.serverCreated = true;
     this.serverCreationStatus="Server was created! Name is " + this.serverName;
-
+    this.servers.push(this.serverName);
   }
 
   checkEmpty(){
@@ -41,4 +46,15 @@ export class ServersComponent implements OnInit {
     this.serverName = (<HTMLInputElement>event.target).value;
   }
 
+  displayDetails(){
+    this.toShow = !this.toShow;
+    this.toShowLists.push(this.toShowValue++);
+    console.log(this.toShowLists);
+  }
+
+  setColor(number){
+    if(number >= 5 ){
+      return 'blue';
+    }
+  }
 }
