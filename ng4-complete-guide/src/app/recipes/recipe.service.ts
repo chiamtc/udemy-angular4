@@ -1,7 +1,15 @@
-import { EventEmitter } from "@angular/core";
+import { Injectable,OnInit } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
+import { Subject } from 'rxjs/Subject';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
+
+@Injectable()
 export class RecipeService{
+  constructor(private slService: ShoppingListService ){
+
+  }
+  recipesChange = new Subject<Recipe[]>();
 	private recipes: Recipe[] = [
     new Recipe('Pizza', 'Taste good!', 'https://cdn.modpizza.com/wp-content/uploads/2016/11/mod-pizza-maddy-default-e1479167621575.png', [
     		new Ingredient("Pepperoni", 3),
@@ -14,7 +22,6 @@ export class RecipeService{
     	])
     ];
 
-  recipeSelected = new EventEmitter<Recipe>();
 
   getRecipes(){
   	return this.recipes.slice();
@@ -22,5 +29,24 @@ export class RecipeService{
 
   getRecipe(id:number){
     return this.recipes[id];
+  }
+
+  addRecipe(recipe:Recipe){
+    this.recipes.push(recipe);
+    this.slService.addIngredients(recipe.ingredients);
+    this.recipesChange.next(this.recipes.slice());
+  }
+
+  updateRecipe(index:number, newRecipe:Recipe){
+    this.recipes[index] = newRecipe;
+    this.recipesChange.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index:number){
+    this.recipes.splice(index,1);
+    this.recipesChange.next(this.recipes.slice());
+
+    
+
   }
 }
