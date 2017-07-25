@@ -12,14 +12,14 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
-
+import { AuthGuard } from './auth/auth-guard.service';
 const appRoutes:Routes=[
 	{ path :'', redirectTo: '/recipes', pathMatch:'full'},
 	{ path: 'recipes', component: RecipesComponent, children:[
 		{ path: '', component: RecipeStartComponent },
-		{ path: 'new', component: RecipeEditComponent},
+		{ path: 'new', component: RecipeEditComponent, canActivate:[AuthGuard]},
 		{ path: ':id', component: RecipeDetailComponent},
-		{ path: ':id/edit', component: RecipeEditComponent}
+		{ path: ':id/edit', component: RecipeEditComponent ,canActivate:[AuthGuard]}
 	]},
 	{ path: 'shopping-list', component: ShoppingListComponent},
 	{ path: 'signup', component: SignupComponent},

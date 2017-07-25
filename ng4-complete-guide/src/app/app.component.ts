@@ -8,8 +8,8 @@ import * as firebase from 'firebase';
 export class AppComponent implements OnInit{
 	ngOnInit(){
 		firebase.initializeApp({
-			apiKey: "AIzaSyCgOM77Wwn8dksGbqqzjWA40O34caGsMxs",
-    		authDomain: "udemy-ng-http-9866d.firebaseapp.com",
+			apiKey: "AIzaSyBiTL4AObQeKeqPDLP-ibd7n1282GXXhc8",
+    		authDomain: "ng-recipe-book-5849b.firebaseapp.com",
 		});
 	}
 }
