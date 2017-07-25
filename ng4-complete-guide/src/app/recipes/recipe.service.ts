@@ -9,6 +9,9 @@ export class RecipeService{
   constructor(private slService: ShoppingListService ){
 
   }
+
+
+
   recipesChange = new Subject<Recipe[]>();
 	private recipes: Recipe[] = [
     new Recipe('Pizza', 'Taste good!', 'https://cdn.modpizza.com/wp-content/uploads/2016/11/mod-pizza-maddy-default-e1479167621575.png', [
@@ -22,6 +25,10 @@ export class RecipeService{
     	])
     ];
 
+  setRecipes(recipes: Recipe[]){
+    this.recipes = recipes;
+    this.recipesChange.next(this.recipes);
+  }
 
   getRecipes(){
   	return this.recipes.slice();
