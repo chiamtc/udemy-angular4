@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { SigninComponent } from './auth/signin/signin.component';
-import { SignupComponent } from './auth/signup/signup.component';
+
 import { HomeComponent} from './core/home/home.component';
+import { AuthGuard } from './auth/auth-guard.service';
 
 const appRoutes:Routes=[
 	{ path :'', component: HomeComponent},
@@ -14,7 +14,8 @@ const appRoutes:Routes=[
 
 @NgModule({
 	imports:[RouterModule.forRoot(appRoutes)],
-	exports:[RouterModule]
+	exports:[RouterModule],
+	providers:[AuthGuard]
 
 })
 

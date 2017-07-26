@@ -27,4 +27,8 @@ export class HeaderComponent{
 	onFetch(){
 		this.dsService.getRecipes();
 	}
+
+	isAuthenticated() {
+    return this.authService.isAuthenticated();
+  }
 }
