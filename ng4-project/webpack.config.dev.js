@@ -1,13 +1,14 @@
 var path = require('path');
 
 var webpackMerge = require('webpack-merge');
-var commonConfig = require('./webpack.config.common');
+var commonConfig = require('./webpack.config.common.js');
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',
+
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
+        path: path.resolve(__dirname + '/public/js/app'),
+        publicPath: "/js/app/",
         filename: 'bundle.js',
         chunkFilename: '[id].chunk.js'
     },
@@ -16,17 +17,14 @@ module.exports = webpackMerge(commonConfig, {
             {
                 test: /\.ts$/,
                 use: [
-                    { loader: 'awesome-typescript-loader', options: {
+                    {loader: 'awesome-typescript-loader', options: {
                         transpileOnly: true
                     }},
-                    { loader: 'angular2-template-loader' },
-                    { loader: 'angular-router-loader' }
+                    {loader: 'angular2-template-loader'},
+                    {loader: 'angular-router-loader'}
                 ]
             }
         ]
-    },
-    devServer: {
-        historyApiFallback: true,
-        stats: 'minimal'
+
     }
 });
