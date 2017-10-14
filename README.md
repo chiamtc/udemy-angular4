@@ -1,3 +1,3 @@
 # Readme
-Learning of angularjs 4
+Learning of angular 2/4
 Pretty much self-explanatory with all the folders listed
