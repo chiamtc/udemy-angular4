@@ -1,14 +1,14 @@
-import { Ng4CompleteGuidePage } from './app.po';
+import { NewCliPage } from './app.po';
 
-describe('ng4-complete-guide App', () => {
-  let page: Ng4CompleteGuidePage;
+describe('new-cli App', () => {
+  let page: NewCliPage;
 
   beforeEach(() => {
-    page = new Ng4CompleteGuidePage();
+    page = new NewCliPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!!');
+    expect(page.getParagraphText()).toEqual('app works!');
   });
 });
