@@ -1,14 +1,14 @@
-// effect-http request that will change the store
-import {Router} from "@angular/router";
-import {Effect, Actions} from "@ngrx/effects";
-import {Injectable} from "@angular/core";
-import * as AuthActions from './auth.actions';
+import { Injectable } from '@angular/core';
+import { Actions, Effect } from '@ngrx/effects';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 import * as firebase from 'firebase';
-import {fromPromise} from 'rxjs/observable/fromPromise';
+
+import * as AuthActions from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -18,14 +18,13 @@ export class AuthEffects {
     .map((action: AuthActions.TrySignup) => {
       return action.payload;
     })
-    .switchMap((authData: { username: string, password: string }) => {
+    .switchMap((authData: {username: string, password: string}) => {
       return fromPromise(firebase.auth().createUserWithEmailAndPassword(authData.username, authData.password));
     })
     .switchMap(() => {
       return fromPromise(firebase.auth().currentUser.getIdToken());
     })
     .mergeMap((token: string) => {
-      this.router.navigate(['/']);
       return [
         {
           type: AuthActions.SIGNUP
@@ -40,10 +39,10 @@ export class AuthEffects {
   @Effect()
   authSignin = this.actions$
     .ofType(AuthActions.TRY_SIGNIN)
-    .map((action: AuthActions.TrySignin) => {
+    .map((action: AuthActions.TrySignup) => {
       return action.payload;
     })
-    .switchMap((authData: { username: string, password: string }) => {
+    .switchMap((authData: {username: string, password: string}) => {
       return fromPromise(firebase.auth().signInWithEmailAndPassword(authData.username, authData.password));
     })
     .switchMap(() => {
@@ -59,8 +58,8 @@ export class AuthEffects {
           type: AuthActions.SET_TOKEN,
           payload: token
         }
-      ]
-    })
+      ];
+    });
 
   @Effect({dispatch: false})
   authLogout = this.actions$

@@ -1,10 +1,11 @@
-import {Ingredient} from "../../shared/ingredient.model";
-import * as ShoppingListActions from "./shopping-list.actions";
+import * as ShoppingListActions from './shopping-list.actions';
 
-export interface State{
-  ingredients:Ingredient[];
-  editedIngredient:Ingredient;
-  editedIngredientIndex:number;
+import { Ingredient } from '../../shared/ingredient.model';
+
+export interface State {
+  ingredients: Ingredient[];
+  editedIngredient: Ingredient;
+  editedIngredientIndex: number;
 }
 
 const initialState: State = {
@@ -12,8 +13,8 @@ const initialState: State = {
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10),
   ],
-  editedIngredient:null,
-  editedIngredientIndex:-1
+  editedIngredient: null,
+  editedIngredientIndex: -1
 };
 
 export function shoppingListReducer(state = initialState, action: ShoppingListActions.ShoppingListActions) {
@@ -23,47 +24,47 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
         ...state,
         ingredients: [...state.ingredients, action.payload]
       };
-
     case ShoppingListActions.ADD_INGREDIENTS:
       return {
         ...state,
-        ingredients:[...state.ingredients, ...action.payload]
+        ingredients: [...state.ingredients, ...action.payload]
       };
-
     case ShoppingListActions.UPDATE_INGREDIENT:
       const ingredient = state.ingredients[state.editedIngredientIndex];
-      const updatedIngredient={
+      const updatedIngredient = {
         ...ingredient,
         ...action.payload.ingredient
       };
       const ingredients = [...state.ingredients];
       ingredients[state.editedIngredientIndex] = updatedIngredient;
-      return{
+      return {
         ...state,
-        ingredients:ingredients
+        ingredients: ingredients,
+        editedIngredient: null,
+        editedIngredientIndex: -1
       };
     case ShoppingListActions.DELETE_INGREDIENT:
-      const oldIng = [...state.ingredients];
-      oldIng.splice(state.editedIngredientIndex,1);
-      return{
+      const oldIngredients = [...state.ingredients];
+      oldIngredients.splice(state.editedIngredientIndex, 1);
+      return {
         ...state,
-        ingredients: oldIng
+        ingredients: oldIngredients,
+        editedIngredient: null,
+        editedIngredientIndex: -1
       };
     case ShoppingListActions.START_EDIT:
       const editedIngredient = {...state.ingredients[action.payload]};
-
-      return{
+      return {
         ...state,
-        editedIngredient:editedIngredient,
-        editedIngredientIndex:action.payload
+        editedIngredient: editedIngredient,
+        editedIngredientIndex: action.payload
       };
-
     case ShoppingListActions.STOP_EDIT:
-      return{
+      return {
         ...state,
-        editedIngredient:null,
-        editedIngredientIndex:-1
-      }
+        editedIngredient: null,
+        editedIngredientIndex: -1
+      };
     default:
       return state;
   }
