@@ -7,14 +7,22 @@ import {TrainingComponent} from "./training.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
 import {TrainingRoutingModule} from "./training-routing.module";
+import {StoreModule} from "@ngrx/store";
+import {trainingReducer} from "./training.reducer";
 
 @NgModule({
-  declarations:[CurrentTrainingComponent,NewTrainingComponent,
-    StopTrainingComponent, PastTrainingsComponent,TrainingComponent],
-  imports:[ReactiveFormsModule, SharedModule, TrainingRoutingModule],
-  exports:[],
+  declarations: [
+    CurrentTrainingComponent, NewTrainingComponent,
+    StopTrainingComponent, PastTrainingsComponent,
+    TrainingComponent
+  ],
+  imports: [
+    ReactiveFormsModule, SharedModule,
+    TrainingRoutingModule, StoreModule.forFeature('training', trainingReducer)
+  ],
+  exports: [],
   entryComponents: [StopTrainingComponent]
 })
-export class TrainingModule{
+export class TrainingModule {
 
 }

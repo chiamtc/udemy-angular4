@@ -21,6 +21,7 @@ export class AuthService {
   initAuthListener() {
     //authState is from angularfireauth = emits something whne authnetication chagnes.
     this.auth.authState.subscribe(user => {
+      console.log(user);
       if (user) {
         this.store.dispatch(new Auth.SetAuthenticated());
         /*this.isAuthenticated = true;
